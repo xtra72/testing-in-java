@@ -1,0 +1,44 @@
+= 예제 3. ParameterizedTest를 이용해 5개의 정수를 하나씩 적용하여 테스트해 보자.
+
+* 1,2,-3,4,5 다섯 개의 정수가 ValueSource로 제공
+* 값이 양수일 때만 통과
+* 실패한 경우(값이 음수)는 별도 표시
+* 파라미터 개수만큼 수행 후 종료
+s
+[source,java]
+----
+import static org.junit.jupiter.api.Assertions.assertTrue;
+
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.ValueSource;
+
+public class TestParameterizedTest{
+
+    @ParameterizedTest
+    @ValueSource(ints = {1, 2, -3, 4, 5})
+    void testPositiveNumbers(int number) {
+        assertTrue(isPositive(number));
+    }
+
+    private boolean isPositive(int number) {
+        return number > 0;
+    }
+}
+----
+
+---
+
+[cols="1,1,1", frame=none, grid=none]
+|===
+<s|
+link:./junit5_guide.adoc[이전]
+^s|
+ifndef::env-github[]
+link:../index.adoc[목록]
+endif::[]
+
+ifdef::env-github[]
+link:../README.md[목록]
+endif::[]
+>s|
+|===

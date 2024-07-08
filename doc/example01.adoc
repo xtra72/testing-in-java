@@ -1,0 +1,43 @@
+= VSCode에서 빌드 툴로 maven을 사용하도록 프로젝트 생성하고, 종속성 추가에 대해 확인해 보자.
+
+. F1 -> Java: Create Java Project...
++
+image::images/create_java_project.png[]
+. maven create from achetype
++
+image::images/maven_create_from_archetype.png[]
+. No Archetype
++
+image::images/maven_no_archetype.png[]
+. New Maven Project에서 com.nhnacademy 입력
++
+image::images/new_maven_project.png[]
+. input artifact id
++
+image::images/input_artifact_id.png[]
+. 프로젝트 폴더 선택
++
+image::images/select_maven_project_folder.png[]
+. 프로젝트 생성 확인 후 열기
++
+image::images/open_maven_project_folder.png[]
+. 생성된 프로젝트에서 pom.xml 파일 열기
++
+image::images/open_maven_pom.png[]
+
+---
+
+[cols="1,1,1", frame=none, grid=none]
+|===
+<s|
+link:./junit5_guide.adoc[이전]
+^s|
+ifndef::env-github[]
+link:../index.adoc[목록]
+endif::[]
+
+ifdef::env-github[]
+link:../README.md[목록]
+endif::[]
+>s|
+|===

@@ -1,0 +1,65 @@
+= 예제 2. 다음의 @RepeatedTest를 동작시켜 각각의 설정에 관해 확인해 보자.
+
+[source, java]
+----
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.fail;
+
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.RepeatedTest;
+import org.junit.jupiter.api.RepetitionInfo;
+import org.junit.jupiter.api.TestInfo;
+
+class RepeatedTestsDemo {
+
+    private Logger logger = LogManager.getLogger();
+
+    @BeforeEach
+    void beforeEach(TestInfo testInfo, RepetitionInfo repetitionInfo) {
+        int currentRepetition = repetitionInfo.getCurrentRepetition();
+        int totalRepetitions = repetitionInfo.getTotalRepetitions();
+        String methodName = testInfo.getTestMethod().get().getName();
+        logger.info(String.format("About to execute repetition %d of %d for %s", //
+            currentRepetition, totalRepetitions, methodName));
+    }
+
+    @RepeatedTest(10)
+    void repeatedTest() {
+        // ...
+    }
+
+    @RepeatedTest(5)
+    void repeatedTestWithRepetitionInfo(RepetitionInfo repetitionInfo) {
+        assertEquals(5, repetitionInfo.getTotalRepetitions());
+    }
+
+    @RepeatedTest(value = 8, failureThreshold = 2)
+    void repeatedTestWithFailureThreshold(RepetitionInfo repetitionInfo) {
+        // Simulate unexpected failure every second repetition
+        if (repetitionInfo.getCurrentRepetition() % 2 == 0) {
+            fail("Boom!");
+        }
+    }
+}
+----
+
+---
+
+[cols="1,1,1", frame=none, grid=none]
+|===
+<s|
+link:./junit5_guide.adoc[이전]
+^s|
+ifndef::env-github[]
+link:../index.adoc[목록]
+endif::[]
+
+ifdef::env-github[]
+link:../README.md[목록]
+endif::[]
+>s|
+|===
